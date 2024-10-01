@@ -35,7 +35,7 @@ loader.load('buildingModelAtlanta.glb', function(gltf) {
     scene.add(model);
     
     // Adjust camera position and target to capture the entire building
-    camera.position.set(0, 40, 400); // Zoom out further by increasing Z-position
+    camera.position.set(0, 40, 800); // Zoom out further by increasing Z-position
     controls.target.set(0, 40, 0); // Center the camera's target on the building's middle
     controls.update(); // Update controls with new target
 
