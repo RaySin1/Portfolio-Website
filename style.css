@@ -14,7 +14,7 @@ html, body {
 /* Style the heading text */
 h1 {
     margin: 0;
-    padding: 20px 0;
+    padding: 40px 0; /* Increase padding to push the text down */
     text-align: center;
     font-size: 2em;
     color: #333; /* Darker gray for the text */
@@ -31,7 +31,7 @@ canvas {
 /* Optional: Style the container for the canvas */
 #container {
     width: 100%;
-    height: 100%;
+    height: calc(100% - 80px); /* Adjust container height to give space for the heading */
     display: flex;
     justify-content: center;
     align-items: center;
