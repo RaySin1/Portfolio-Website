@@ -44,44 +44,30 @@ loader.load('buildingModelAtlanta.glb', function(gltf) {
     var model = gltf.scene;
     scene.add(model);
     
-    // Rotate the building 90 degrees to the left (on the Y-axis)
-    model.rotation.y = -Math.PI / 3.5;
+    // Keep the building stationary
+    model.rotation.y = -Math.PI / 3.5; // Adjust the initial rotation as needed
 
-    // Start the camera zoomed out and above
-    camera.position.set(0, 600, 1000); // Initial zoomed out position
+    // Set the initial camera position (zoomed out)
+    let radius = 1000; // Radius for the camera's circular path
+    let angle = 0; // Start at 0 degrees (facing the building)
 
-    // Animation variables
-    let rotationAngle = 0;
-    const zoomDuration = 200; // Number of frames to zoom in
-    const fullRotation = Math.PI * 2; // 360 degrees
-    const finalPosition = { x: 0, y: 300, z: 400 }; // Final camera position
+    camera.position.set(radius * Math.cos(angle), 300, radius * Math.sin(angle)); // Set initial position
+    controls.target.set(0, 60, 0); // Focus the camera on the middle of the building
 
-    // Animation loop to animate the camera zoom and rotation
+    // Animation loop to rotate the camera around the building
     var animate = function () {
         requestAnimationFrame(animate);
 
-        // Zoom in over time
-        if (zoomDuration > 0 && rotationAngle < fullRotation) {
-            // Slowly zoom in
-            camera.position.x += (finalPosition.x - camera.position.x) * 0.03;
-            camera.position.y += (finalPosition.y - camera.position.y) * 0.03;
-            camera.position.z += (finalPosition.z - camera.position.z) * 0.03;
-        }
+        // Rotate the camera around the Y-axis in a circle (360 degrees)
+        angle += 0.01; // Increment the angle for smooth rotation
+        camera.position.x = radius * Math.cos(angle); // X position on the circle
+        camera.position.z = radius * Math.sin(angle); // Z position on the circle
 
-        // Rotate around the Y-axis (full 360-degree rotation)
-        if (rotationAngle < fullRotation) {
-            camera.position.x = 600 * Math.cos(rotationAngle);
-            camera.position.z = 600 * Math.sin(rotationAngle);
-            rotationAngle += 0.02; // Increase rotation angle for smooth rotation
-        } else {
-            // Ensure camera reaches the final position at the end of the animation
-            camera.position.set(finalPosition.x, finalPosition.y, finalPosition.z);
-        }
+        // Keep the camera target fixed on the building
+        controls.target.set(0, 60, 0); // Always focus on the building
+        controls.update(); // Update the camera position
 
-        controls.target.set(0, 60, 0); // Center the camera's target on the middle of the building
-        controls.update(); // Update controls with new target
-
-        renderer.render(scene, camera);
+        renderer.render(scene, camera); // Render the scene
     };
 
     animate(); // Start the animation loop
