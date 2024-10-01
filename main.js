@@ -8,14 +8,19 @@ var renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
-// Add ambient light (soft light for overall brightness)
-var ambientLight = new THREE.AmbientLight(0xffffff, 1); // Color: white, Intensity: 1
+// Add ambient light (increase intensity for overall brightness)
+var ambientLight = new THREE.AmbientLight(0xffffff, 2); // Increase intensity to 2
 scene.add(ambientLight);
 
-// Add directional light (like sunlight)
-var directionalLight = new THREE.DirectionalLight(0xffffff, 0.5); // White light with lower intensity
-directionalLight.position.set(10, 10, 10); // Position the light for better visibility
+// Add directional light (like sunlight, increase intensity and adjust position)
+var directionalLight = new THREE.DirectionalLight(0xffffff, 1.5); // Increase intensity
+directionalLight.position.set(20, 20, 10); // Adjust light position for better illumination
 scene.add(directionalLight);
+
+// Add a spotlight (for focused lighting on the model)
+var spotLight = new THREE.SpotLight(0xffffff, 2); // Bright spotlight with intensity of 2
+spotLight.position.set(15, 40, 35); // Position the spotlight above the model
+scene.add(spotLight);
 
 // Add Orbit Controls for camera movement
 var controls = new THREE.OrbitControls(camera, renderer.domElement);
@@ -25,7 +30,7 @@ var loader = new THREE.GLTFLoader();
 loader.load('buildingModelAtlanta.glb', function(gltf) {
     var model = gltf.scene;
     scene.add(model);
-    camera.position.z = 5;
+    camera.position.z = 10;  // Move camera further back to view the entire model
 }, undefined, function(error) {
     console.error(error);
 });
