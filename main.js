@@ -34,8 +34,11 @@ loader.load('buildingModelAtlanta.glb', function(gltf) {
     var model = gltf.scene;
     scene.add(model);
     
+    // Rotate the building 90 degrees to the left (on the Y-axis)
+    model.rotation.y = -Math.PI / 2; 
+
     // Adjust camera position and target to capture the entire building
-    camera.position.set(0, 40, 1000); // Zoom out further by increasing Z-position
+    camera.position.set(0, 40, 900); // Move the camera much farther back
     controls.target.set(0, 40, 0); // Center the camera's target on the building's middle
     controls.update(); // Update controls with new target
 
