@@ -11,6 +11,15 @@ document.body.appendChild(renderer.domElement);
 // Set the background color to light gray (or any other color you prefer)
 renderer.setClearColor(0xd3d3d3); // Light gray background
 
+// Handle window resizing to keep the renderer and camera responsive
+window.addEventListener('resize', function() {
+    var width = window.innerWidth;
+    var height = window.innerHeight;
+    renderer.setSize(width, height);
+    camera.aspect = width / height;
+    camera.updateProjectionMatrix();
+});
+
 // Add ambient light (increase intensity for overall brightness)
 var ambientLight = new THREE.AmbientLight(0xffffff, 2); // Increase intensity to 2
 scene.add(ambientLight);
