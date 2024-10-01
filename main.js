@@ -37,29 +37,16 @@ scene.add(directionalLight2);
 // Add Orbit Controls for camera movement
 var controls = new THREE.OrbitControls(camera, renderer.domElement);
 
-// Load the 3D model (replace 'buildingModelAtlanta.glb' with your actual model file name)
-var loader = new THREE.GLTFLoader();
+// Load the 3D model using GLTFLoader
+var loader = new THREE.GLTFLoader(); // Ensure that this line comes after loading GLTFLoader.js
+
 loader.load('buildingModelAtlanta.glb', function(gltf) {
     var model = gltf.scene;
     scene.add(model);
     
     // Rotate the building 90 degrees to the left (on the Y-axis)
-    model.rotation.y = -Math.PI / 3.5; 
+    model.rotation.y = -Math.PI / 3.5;
 
     // Adjust camera position to look down from a higher angle
-    camera.position.set(0, 300, 400); // Raise the camera's Y-position and adjust the Z for better elevation
-    controls.target.set(0, 60, 0); // Center the camera's target on the middle of the building
-    controls.update(); // Update controls with new target
-
-}, undefined, function(error) {
-    console.error(error);
-});
-
-// Animation loop to render the scene
-var animate = function () {
-    requestAnimationFrame(animate);
-    controls.update(); // Update camera controls
-    renderer.render(scene, camera);
-};
-
-animate();
+    camera.position.set(0, 300, 400); 
+    co
