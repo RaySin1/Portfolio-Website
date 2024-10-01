@@ -8,10 +8,19 @@ var renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
-// Add Orbit Controls
+// Add ambient light (soft light for overall brightness)
+var ambientLight = new THREE.AmbientLight(0xffffff, 1); // Color: white, Intensity: 1
+scene.add(ambientLight);
+
+// Add directional light (like sunlight)
+var directionalLight = new THREE.DirectionalLight(0xffffff, 0.5); // White light with lower intensity
+directionalLight.position.set(10, 10, 10); // Position the light for better visibility
+scene.add(directionalLight);
+
+// Add Orbit Controls for camera movement
 var controls = new THREE.OrbitControls(camera, renderer.domElement);
 
-// Load the 3D model (replace 'your_model.glb' with your actual model file name)
+// Load the 3D model (replace 'buildingModelAtlanta.glb' with your actual model file name)
 var loader = new THREE.GLTFLoader();
 loader.load('buildingModelAtlanta.glb', function(gltf) {
     var model = gltf.scene;
