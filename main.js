@@ -2,7 +2,7 @@ console.log("Three.js script is running");
 
 // Create the scene, camera, and renderer
 var scene = new THREE.Scene();
-var camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 1000); // Wider FOV for better view
+var camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 2000); // Increase far plane for zoomed-out view
 
 var renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
@@ -47,20 +47,45 @@ loader.load('buildingModelAtlanta.glb', function(gltf) {
     // Rotate the building 90 degrees to the left (on the Y-axis)
     model.rotation.y = -Math.PI / 3.5;
 
-    // Adjust camera position to look down from a higher angle
-    camera.position.set(0, 300, 400); 
-    controls.target.set(0, 60, 0); // Center the camera's target on the middle of the building
-    controls.update(); 
+    // Start the camera zoomed out and above
+    camera.position.set(0, 600, 1000); // Initial zoomed out position
+
+    // Animation variables
+    let rotationAngle = 0;
+    const zoomDuration = 200; // Number of frames to zoom in
+    const fullRotation = Math.PI * 2; // 360 degrees
+    const finalPosition = { x: 0, y: 300, z: 400 }; // Final camera position
+
+    // Animation loop to animate the camera zoom and rotation
+    var animate = function () {
+        requestAnimationFrame(animate);
+
+        // Zoom in over time
+        if (zoomDuration > 0 && rotationAngle < fullRotation) {
+            // Slowly zoom in
+            camera.position.x += (finalPosition.x - camera.position.x) * 0.03;
+            camera.position.y += (finalPosition.y - camera.position.y) * 0.03;
+            camera.position.z += (finalPosition.z - camera.position.z) * 0.03;
+        }
+
+        // Rotate around the Y-axis (full 360-degree rotation)
+        if (rotationAngle < fullRotation) {
+            camera.position.x = 600 * Math.cos(rotationAngle);
+            camera.position.z = 600 * Math.sin(rotationAngle);
+            rotationAngle += 0.02; // Increase rotation angle for smooth rotation
+        } else {
+            // Ensure camera reaches the final position at the end of the animation
+            camera.position.set(finalPosition.x, finalPosition.y, finalPosition.z);
+        }
+
+        controls.target.set(0, 60, 0); // Center the camera's target on the middle of the building
+        controls.update(); // Update controls with new target
+
+        renderer.render(scene, camera);
+    };
+
+    animate(); // Start the animation loop
 
 }, undefined, function(error) {
     console.error(error);
 });
-
-// Animation loop to render the scene
-var animate = function () {
-    requestAnimationFrame(animate);
-    controls.update(); // Update camera controls
-    renderer.render(scene, camera);
-};
-
-animate(); // Closing the function properly
