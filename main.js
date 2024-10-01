@@ -8,22 +8,22 @@ var renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
-// Set the background color to light gray (or use any other color)
+// Set the background color to light gray (or any other color you prefer)
 renderer.setClearColor(0xd3d3d3); // Light gray background
 
 // Add ambient light (increase intensity for overall brightness)
 var ambientLight = new THREE.AmbientLight(0xffffff, 2); // Increase intensity to 2
 scene.add(ambientLight);
 
-// Add directional light (like sunlight, increase intensity and adjust position)
+// Add directional light (like sunlight, adjust its position and intensity)
 var directionalLight = new THREE.DirectionalLight(0xffffff, 1.5); // Increase intensity
-directionalLight.position.set(20, 20, 10); // Adjust light position for better illumination
+directionalLight.position.set(50, 50, 50); // Move the light to a higher position to cover the entire model
 scene.add(directionalLight);
 
-// Add a spotlight (for focused lighting on the model)
-var spotLight = new THREE.SpotLight(0xffffff, 2); // Bright spotlight with intensity of 2
-spotLight.position.set(15, 40, 35); // Position the spotlight above the model
-scene.add(spotLight);
+// Add another directional light from a different angle
+var directionalLight2 = new THREE.DirectionalLight(0xffffff, 1.0);
+directionalLight2.position.set(-50, 50, -50); // This will ensure better lighting coverage from another angle
+scene.add(directionalLight2);
 
 // Add Orbit Controls for camera movement
 var controls = new THREE.OrbitControls(camera, renderer.domElement);
@@ -34,9 +34,9 @@ loader.load('buildingModelAtlanta.glb', function(gltf) {
     var model = gltf.scene;
     scene.add(model);
     
-    // Adjust camera position and target to better fit the model in view
-    camera.position.set(10, 10, 20); // Set the camera position further back and centered
-    controls.target.set(0, 0, 0); // Make sure the camera looks at the center of the model
+    // Adjust camera position and target to capture the entire building
+    camera.position.set(20, 40, 80); // Move the camera farther back and up to capture the full height of the building
+    controls.target.set(0, 20, 0); // Center the camera's target on the middle of the building
     controls.update(); // Update controls with new target
 
 }, undefined, function(error) {
