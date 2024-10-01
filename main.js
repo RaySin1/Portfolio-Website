@@ -8,7 +8,7 @@ var renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
-// Enable orbit controls for camera movement
+// Add Orbit Controls
 var controls = new THREE.OrbitControls(camera, renderer.domElement);
 
 // Load the 3D model (replace 'your_model.glb' with your actual model file name)
