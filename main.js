@@ -38,7 +38,7 @@ loader.load('buildingModelAtlanta.glb', function(gltf) {
     model.rotation.y = -Math.PI / 3.5; 
 
     // Adjust camera position to look down from a higher angle
-    camera.position.set(0, 300, 600); // Raise the camera's Y-position and adjust the Z for better elevation
+    camera.position.set(0, 300, 700); // Raise the camera's Y-position and adjust the Z for better elevation
     controls.target.set(0, 60, 0); // Center the camera's target on the middle of the building
     controls.update(); // Update controls with new target
 
