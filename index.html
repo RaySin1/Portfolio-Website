@@ -6,13 +6,17 @@
     <title>Ray Industries 3D Portfolio</title>
     <link rel="stylesheet" href="style.css"> <!-- Link to your CSS file -->
 
+    <!-- Include Three.js from CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
     <!-- Include OrbitControls from CDN -->
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
-
 </head>
 <body>
     <h1>Welcome to Ray Industries 3D Portfolio</h1>
-    <div id="container"></div>
-    <script src="main.js"></script> <!-- Link to your main.js file -->
+    <div id="container"></div> <!-- Container for the canvas -->
+
+    <!-- Your main.js script, which depends on Three.js and OrbitControls -->
+    <script src="main.js"></script>
 </body>
 </html>
