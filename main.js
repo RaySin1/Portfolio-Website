@@ -2,7 +2,7 @@ console.log("Three.js script is running");
 
 // Create the scene, camera, and renderer
 var scene = new THREE.Scene();
-var camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 1000); // Lower FOV for a wider view
+var camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 1000); // Wider FOV for better view
 
 var renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
@@ -35,8 +35,8 @@ loader.load('buildingModelAtlanta.glb', function(gltf) {
     scene.add(model);
     
     // Adjust camera position and target to capture the entire building
-    camera.position.set(0, 20, 150); // Move the camera farther back to fit the entire building
-    controls.target.set(0, 20, 0); // Center the camera's target on the building's middle
+    camera.position.set(0, 40, 200); // Move the camera much farther back to fit the entire building
+    controls.target.set(0, 40, 0); // Center the camera's target on the building's middle
     controls.update(); // Update controls with new target
 
 }, undefined, function(error) {
