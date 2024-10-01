@@ -49,7 +49,9 @@ loader.load('buildingModelAtlanta.glb', function(gltf) {
 
     // Set the camera to a fixed position
     camera.position.set(0, 300, 400); // Final camera position focused on the building
-    controls.target.set(0, 60, 0); // Focus the camera on the middle of the building
+    
+    // Adjust the target to focus slightly more to the left
+    controls.target.set(-50, 60, 0); // Move the camera's focus point to the left (x = -50)
     controls.update(); // Update the camera position
 
     // Render the scene initially
