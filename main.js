@@ -38,8 +38,8 @@ loader.load('buildingModelAtlanta.glb', function(gltf) {
     model.rotation.y = -Math.PI / 2; 
 
     // Adjust camera position and target to capture the entire building
-    camera.position.set(0, 50, 700); // Move the camera slightly closer and up to match the view
-    controls.target.set(0, 50, 0); // Center the camera's target on the building's middle
+    camera.position.set(0, 60, 500); // Adjust to zoom in slightly and raise the camera height
+    controls.target.set(0, 60, 0); // Center the camera's target on the middle of the building
     controls.update(); // Update controls with new target
 
 }, undefined, function(error) {
