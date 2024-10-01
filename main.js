@@ -8,6 +8,9 @@ var renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
+// Set the background color to light gray (or use any other color)
+renderer.setClearColor(0xd3d3d3); // Light gray background
+
 // Add ambient light (increase intensity for overall brightness)
 var ambientLight = new THREE.AmbientLight(0xffffff, 2); // Increase intensity to 2
 scene.add(ambientLight);
@@ -30,7 +33,12 @@ var loader = new THREE.GLTFLoader();
 loader.load('buildingModelAtlanta.glb', function(gltf) {
     var model = gltf.scene;
     scene.add(model);
-    camera.position.z = 10;  // Move camera further back to view the entire model
+    
+    // Adjust camera position and target to better fit the model in view
+    camera.position.set(10, 10, 20); // Set the camera position further back and centered
+    controls.target.set(0, 0, 0); // Make sure the camera looks at the center of the model
+    controls.update(); // Update controls with new target
+
 }, undefined, function(error) {
     console.error(error);
 });
