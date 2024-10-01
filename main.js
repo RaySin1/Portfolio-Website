@@ -38,7 +38,7 @@ scene.add(directionalLight2);
 var controls = new THREE.OrbitControls(camera, renderer.domElement);
 
 // Load the 3D model using GLTFLoader
-var loader = new THREE.GLTFLoader(); // Ensure that this line comes after loading GLTFLoader.js
+var loader = new THREE.GLTFLoader();
 
 loader.load('buildingModelAtlanta.glb', function(gltf) {
     var model = gltf.scene;
@@ -49,4 +49,18 @@ loader.load('buildingModelAtlanta.glb', function(gltf) {
 
     // Adjust camera position to look down from a higher angle
     camera.position.set(0, 300, 400); 
-    co
+    controls.target.set(0, 60, 0); // Center the camera's target on the middle of the building
+    controls.update(); 
+
+}, undefined, function(error) {
+    console.error(error);
+});
+
+// Animation loop to render the scene
+var animate = function () {
+    requestAnimationFrame(animate);
+    controls.update(); // Update camera controls
+    renderer.render(scene, camera);
+};
+
+animate(); // Closing the function properly
