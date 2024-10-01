@@ -55,7 +55,7 @@ loader.load('buildingModelAtlanta.glb', function(gltf) {
     controls.target.set(0, 60, 0); // Focus the camera on the middle of the building
 
     // Variables to control rotation
-    const rotationSpeed = 0.1; // Rotation speed
+    const rotationSpeed = 0.001; // Rotation speed
     const fullRotation = Math.PI * 2; // Full 360 degrees (2π radians)
 
     // Animation loop to rotate the camera around the building
